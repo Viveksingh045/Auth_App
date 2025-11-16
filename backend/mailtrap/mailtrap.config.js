@@ -1,26 +1,21 @@
-import nodemailer from "nodemailer";
-import dotenv from "dotenv";
+import { Resend } from 'resend';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  host: "live.smtp.mailtrap.io",
-  port: 587,
-  auth: {
-    user: "api",
-    pass: process.env.MAILTRAP_TOKEN,   // your Mailtrap LIVE API token
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const sendEmail = async () => {
-  await transporter.sendMail({
-    from: '"Mailtrap Test" <mailtrap@demomailtrap.com>',   // IMPORTANT
-    to: "thinkwithvivek6788@gmail.com",
-    subject: "Testing Mailtrap Live SMTP",
-    text: "This is a real email sent using Mailtrap Live SMTP.",
+(async function () {
+  const { data, error } = await resend.emails.send({
+    from: 'Password Reset <thinkwithvivek6788@vivekcodes.me>',
+    to: ['vivekkumarsingh9450@gmail.com'],
+    subject: 'Password Reset',
+    html: '<strong>Instructions to reset your password</strong>',
   });
 
-  console.log("Email sent!");
-};
+  if (error) {
+    return console.error({ error });
+  }
 
-sendEmail();
+  console.log({ data });
+})();

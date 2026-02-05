@@ -93,5 +93,29 @@ Auth_App/
 └── .env                # Environment variables
 ```
 
+## 🚀 Deployment
+
+This project is optimized for deployment on platforms like **Render**, **Railway**, or **Heroku**.
+
+### Deployment Steps (e.g., Render)
+1. **New Web Service**: Connect your GitHub repository.
+2. **Build Command**: `npm run build`
+3. **Start Command**: `npm start`
+4. **Environment Variables**: Add all variables from your `.env` file (ensure `NODE_ENV` is set to `production`).
+
+### Deployment Steps (Vercel)
+1. **Import Project**: Connect your GitHub repository to Vercel.
+2. **Framework Preset**: Vercel should automatically detect Vite, but you can leave it as "Other" since we use a monolithic structure.
+3. **Build Command**: `npm run build`
+4. **Environment Variables**: Add your `.env` variables in the Vercel dashboard.
+5. **Deploy**: Vercel will use the `vercel.json` to route `/api` to the backend and everything else to the frontend.
+
+### Manual Production Test
+To test the production build locally:
+1. Run `npm run build`
+2. Set `NODE_ENV=production` in your `.env`
+3. Run `npm start`
+4. Access the app at `http://localhost:5000`
+
 ## 📝 License
 This project is licensed under the ISC License.
